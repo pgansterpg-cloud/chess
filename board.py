@@ -1,6 +1,6 @@
 def create_board():
     # ok so this makes the board the rows start from 0 and go to 7 
-    board = [["  " for _ in range(8)] for _ in range(8)]
+    board = [["--" for _ in range(8)] for _ in range(8)]
     board[0] = ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"]
     board[1] = ["bP" for _ in range(8)]
     board[6] = ["wP" for _ in range(8)] 
@@ -17,3 +17,9 @@ def parse_square(text):
     return row, column
 
 
+def move_piece(board, start, end): 
+    start_row, start_column = start
+    end_row, end_column = end
+    board[end_row][end_column] = board[start_row][start_column] 
+    board[start_row][start_column] = "--"
+    
