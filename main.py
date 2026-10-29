@@ -1,4 +1,5 @@
-from board import create_board, print_board 
+from board import *
 
 board = create_board() 
 print_board(board) 
+
