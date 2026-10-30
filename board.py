@@ -25,3 +25,7 @@ def move_piece(board, start, end):
 def is_empty(board,square):
     row, column = square
     return board[row][column] == "--"
+
+def is_on_board(square):
+    row, column = square
+    return 0 <= row <= 7 and 0 <= column <= 7
