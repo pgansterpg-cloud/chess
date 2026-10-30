@@ -16,10 +16,12 @@ def parse_square(text):
     row = 8 - int(text[1])
     return row, column
 
-
 def move_piece(board, start, end): 
     start_row, start_column = start
     end_row, end_column = end
     board[end_row][end_column] = board[start_row][start_column] 
     board[start_row][start_column] = "--"
-    
+
+def is_empty(board,square):
+    row, column = square
+    return board[row][column] == "--"
