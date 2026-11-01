@@ -29,3 +29,26 @@ def is_empty(board,square):
 def is_on_board(square):
     row, column = square
     return 0 <= row <= 7 and 0 <= column <= 7
+
+def is_valid_rook_move(board,start,end): 
+    start_row, start_column = start 
+    end_row, end_column = end
+    
+    #if you are going down a column row is the only thing that should change and if you are going down a row only the end column should change
+    if not ((start_row != end_row and start_column == end_column) or (start_row == end_row and start_column != end_column)):
+        return False 
+
+    if start_column == end_column:
+        for check_row in range(min(start_row,end_row) +1, max(start_row,end_row)):
+            if not is_empty(board,(check_row,start_column)):
+                return False 
+    else: 
+        for check_column in range(min(start_column,end_column) + 1, max(start_column,end_column)):
+            if not is_empty(board,(start_row,check_column)):
+                return False
+    return True
+
+
+    
+
+

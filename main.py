@@ -5,6 +5,8 @@ print_board(board)
 
 current_turn = "w" 
 
+
+
 while True:
     player_input = input("Move: ")
     if player_input == 'quit':
