@@ -48,7 +48,41 @@ def is_valid_rook_move(board,start,end):
                 return False
     return True
 
+def is_valid_bishop_move(board,start,end): 
+    start_row, start_column = start 
+    end_row, end_column = end 
 
+    #start row - end row have to equal the same amount as start column - end_column
+    #wrap it around an abs so all numbers are postives
+    # you have to move the bishop so start and end cannot be the same 
+    if not abs(start_row - end_row) ==  abs(start_column - end_column) or (start_row == end_row and start_column == end_column): 
+        return False
     
+    if start_row > end_row: 
+        row_step = -1 
+    else:
+        row_step = 1
+
+    if start_column > end_column: 
+        column_step = -1 
+    else: 
+        column_step = 1 
+
+    distance = abs(start_row - end_row)
+
+    for step in range(1, distance):
+        check_row = start_row + step * row_step 
+        check_column = start_column + step * column_step 
+        if not is_empty(board,(check_row,check_column)):
+            return False
+
+     
+    return True
+
+board = create_board()
+print("blocked by pawn:", is_valid_bishop_move(board, (7, 2), (5, 4)))
+print("clear path:", is_valid_bishop_move(board, (5, 2), (2, 5)))
+print("clear backwards:", is_valid_bishop_move(board, (2, 5), (5, 2)))
+print("blocked by black pawn:", is_valid_bishop_move(board, (4, 2), (0, 6)))
 
 
