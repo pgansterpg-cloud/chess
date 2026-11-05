@@ -65,7 +65,10 @@ while True:
         print("Not a valid move") 
         continue
 
-
+    #check if piece is a king if it is run king logic 
+    if piece[1] == "K" and not is_valid_king_move(board,start,end):
+        print("Not a valid move") 
+        continue
     
     move_piece(board, start, end) 
     print_board(board)

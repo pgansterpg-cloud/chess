@@ -87,8 +87,14 @@ def is_valid_knight_move(board,start,end):
     start_row, start_column = start
     end_row, end_column = end
 
-    #knight can go up one row and to the right 2 columns
-    #knight can go up one row and to the left 2 columns 
-    #knight can go go up 2 rows and the the right 1 column 
-    #knight can go up 2 rows and to the left 1 column 
+    #knight movement logic
     return (abs(start_row - end_row) == 2 and abs(start_column - end_column) == 1) or (abs(start_row - end_row) == 1 and abs(start_column - end_column) == 2) 
+
+def is_valid_king_move(board,start,end): 
+    start_row, start_column = start
+    end_row, end_column = end 
+
+    row_distance = abs(start_row - end_row) 
+    column_distance = abs(start_column - end_column) 
+    #king can move 1 in any direction
+    return ((row_distance <= 1) and (column_distance <= 1) and ((row_distance != 0) or (column_distance != 0)))
