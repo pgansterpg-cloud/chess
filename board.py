@@ -83,8 +83,12 @@ def is_valid_queen_move(board,start,end):
      #queen is able to move like a rook or a bishop so we can just check if it is valid for either of those pieces
     return is_valid_rook_move(board,start,end) or is_valid_bishop_move(board,start,end)
 
-board = create_board()
-print("straight clear:", is_valid_queen_move(board, (4, 3), (4, 7)))
-print("diagonal clear:", is_valid_queen_move(board, (4, 3), (2, 5)))
-print("L-shape:", is_valid_queen_move(board, (4, 3), (2, 4)))
-print("blocked by pawn:", is_valid_queen_move(board, (7, 3), (5, 3)))
+def is_valid_knight_move(board,start,end): 
+    start_row, start_column = start
+    end_row, end_column = end
+
+    #knight can go up one row and to the right 2 columns
+    #knight can go up one row and to the left 2 columns 
+    #knight can go go up 2 rows and the the right 1 column 
+    #knight can go up 2 rows and to the left 1 column 
+    return (abs(start_row - end_row) == 2 and abs(start_column - end_column) == 1) or (abs(start_row - end_row) == 1 and abs(start_column - end_column) == 2) 

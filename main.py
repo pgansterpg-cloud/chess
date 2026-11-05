@@ -60,6 +60,11 @@ while True:
         print("Not a valid move")
         continue
 
+    #check if piece is a knight if it is run knight logic 
+    if piece[1] == "N" and not is_valid_knight_move(board,start,end):
+        print("Not a valid move") 
+        continue
+
 
     
     move_piece(board, start, end) 
