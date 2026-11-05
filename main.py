@@ -50,6 +50,16 @@ while True:
         print("Not a valid move")
         continue
 
+    #check if piece is a bishop if it is run bishop logic
+    if piece[1] == "B" and not is_valid_bishop_move(board,start,end):
+        print("Not a valid move")
+        continue
+
+    #check if piece is a queen if it is run queen logic 
+    if piece[1] == "Q" and not is_valid_queen_move(board,start,end):
+        print("Not a valid move")
+        continue
+
 
     
     move_piece(board, start, end) 

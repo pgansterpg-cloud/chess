@@ -75,14 +75,16 @@ def is_valid_bishop_move(board,start,end):
         check_column = start_column + step * column_step 
         if not is_empty(board,(check_row,check_column)):
             return False
-
-     
+  
     return True
 
+
+def is_valid_queen_move(board,start,end):    
+     #queen is able to move like a rook or a bishop so we can just check if it is valid for either of those pieces
+    return is_valid_rook_move(board,start,end) or is_valid_bishop_move(board,start,end)
+
 board = create_board()
-print("blocked by pawn:", is_valid_bishop_move(board, (7, 2), (5, 4)))
-print("clear path:", is_valid_bishop_move(board, (5, 2), (2, 5)))
-print("clear backwards:", is_valid_bishop_move(board, (2, 5), (5, 2)))
-print("blocked by black pawn:", is_valid_bishop_move(board, (4, 2), (0, 6)))
-
-
+print("straight clear:", is_valid_queen_move(board, (4, 3), (4, 7)))
+print("diagonal clear:", is_valid_queen_move(board, (4, 3), (2, 5)))
+print("L-shape:", is_valid_queen_move(board, (4, 3), (2, 4)))
+print("blocked by pawn:", is_valid_queen_move(board, (7, 3), (5, 3)))
