@@ -98,3 +98,55 @@ def is_valid_king_move(board,start,end):
     column_distance = abs(start_column - end_column) 
     #king can move 1 in any direction
     return ((row_distance <= 1) and (column_distance <= 1) and ((row_distance != 0) or (column_distance != 0)))
+
+def is_valid_pawn_move(board,start,end):
+    start_row, start_column = start 
+    end_row, end_column = end
+    piece = board[start_row][start_column]  
+
+
+    if piece[0] == 'w':
+        direction = -1
+        if start_row == 6:
+            # 1 row up move or 2 row move on first move
+            return (
+                (end_row == start_row + direction 
+                 and start_column == end_column 
+                 and is_empty(board,end)) 
+                 or 
+                 (end_row == start_row + (2 * direction) 
+                  and start_column == end_column 
+                  and is_empty(board, (start_row + direction, start_column)) 
+                  and is_empty(board,end))
+            )
+        else: 
+            # 1 row up move 
+            return (end_row == start_row + direction and start_column == end_column and is_empty(board,end)) 
+            
+    elif piece[0] == 'b': 
+        direction = 1
+        if start_row == 1: 
+            # 1 row up move or 2 row move on first move
+            return (
+                (end_row == start_row + direction 
+                 and start_column == end_column 
+                 and is_empty(board,end)) 
+                 or 
+                 (end_row == start_row + (2 * direction) 
+                  and start_column == end_column 
+                  and is_empty(board, (start_row + direction, start_column)) 
+                  and is_empty(board,end))
+            ) 
+        else: 
+            # 1 row up move  
+            return (end_row == start_row + direction and start_column == end_column and is_empty(board,end)) 
+    return False
+
+board = create_board()
+print("white one step:", is_valid_pawn_move(board, (6, 4), (5, 4)))
+print("white two steps:", is_valid_pawn_move(board, (6, 4), (4, 4)))
+print("black two steps:", is_valid_pawn_move(board, (1, 4), (3, 4)))
+print("three steps:", is_valid_pawn_move(board, (6, 4), (3, 4)))
+print("diagonal, nothing there:", is_valid_pawn_move(board, (6, 4), (5, 5)))
+board[5][4] = "bN"
+print("blocked two-step:", is_valid_pawn_move(board, (6, 4), (4, 4)))
