@@ -196,11 +196,3 @@ def is_square_attacked(board, square, attacker_color):
                     return True 
                 
     return False
-
-
-board = create_board()
-print("white in check (start):", is_in_check(board, "w"))
-board[6][4] = "--"
-board[4][4] = "bR"
-print("white in check (rook on e4):", is_in_check(board, "w"))
-print("black in check:", is_in_check(board, "b"))
