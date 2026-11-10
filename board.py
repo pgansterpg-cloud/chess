@@ -109,7 +109,7 @@ def is_valid_pawn_move(board,start,end):
         direction = -1
         if start_row == 6:
             # 1 row up move or 2 row move on first move
-            return (
+            if (
                 (end_row == start_row + direction 
                  and start_column == end_column 
                  and is_empty(board,end)) 
@@ -118,16 +118,19 @@ def is_valid_pawn_move(board,start,end):
                   and start_column == end_column 
                   and is_empty(board, (start_row + direction, start_column)) 
                   and is_empty(board,end))
-            )
-        else: 
+            ):
+                 return True 
+            
+        else:
             # 1 row up move 
-            return (end_row == start_row + direction and start_column == end_column and is_empty(board,end)) 
+            if (end_row == start_row + direction and start_column == end_column and is_empty(board,end)): 
+                return True 
             
     elif piece[0] == 'b': 
         direction = 1
         if start_row == 1: 
             # 1 row up move or 2 row move on first move
-            return (
+            if(
                 (end_row == start_row + direction 
                  and start_column == end_column 
                  and is_empty(board,end)) 
@@ -136,17 +139,22 @@ def is_valid_pawn_move(board,start,end):
                   and start_column == end_column 
                   and is_empty(board, (start_row + direction, start_column)) 
                   and is_empty(board,end))
-            ) 
+            ):
+                return True
+             
         else: 
             # 1 row up move  
-            return (end_row == start_row + direction and start_column == end_column and is_empty(board,end)) 
-    return False
+            if (end_row == start_row + direction and start_column == end_column and is_empty(board,end)):
+                return True
+            
+    target = board[end_row][end_column]
 
-board = create_board()
-print("white one step:", is_valid_pawn_move(board, (6, 4), (5, 4)))
-print("white two steps:", is_valid_pawn_move(board, (6, 4), (4, 4)))
-print("black two steps:", is_valid_pawn_move(board, (1, 4), (3, 4)))
-print("three steps:", is_valid_pawn_move(board, (6, 4), (3, 4)))
-print("diagonal, nothing there:", is_valid_pawn_move(board, (6, 4), (5, 5)))
-board[5][4] = "bN"
-print("blocked two-step:", is_valid_pawn_move(board, (6, 4), (4, 4)))
+    if (
+        (end_row == start_row + direction)
+        and (abs(start_column - end_column) == 1)
+        and (target != "--") 
+        and (target[0] != piece[0]) 
+        ):
+        return True
+   
+    return False

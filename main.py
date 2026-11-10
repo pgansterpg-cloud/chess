@@ -69,6 +69,11 @@ while True:
     if piece[1] == "K" and not is_valid_king_move(board,start,end):
         print("Not a valid move") 
         continue
+
+    #check if piece is a pawn if it is run pawn logic
+    if piece[1] == "P" and not is_valid_pawn_move(board,start,end):
+        print("Not a valid move") 
+        continue
     
     move_piece(board, start, end) 
     print_board(board)
