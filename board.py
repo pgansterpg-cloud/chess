@@ -99,6 +99,24 @@ def is_valid_king_move(board,start,end):
     #king can move 1 in any direction
     return ((row_distance <= 1) and (column_distance <= 1) and ((row_distance != 0) or (column_distance != 0)))
 
+def find_king(board, color):
+    for row in range(8):
+        for column in range(8): 
+           square = board[row][column] 
+           if square == (color + "K"):
+               return (row, column)  
+
+def is_in_check(board, color):
+    king_location = find_king(board, color) 
+
+    if color == "w":
+        enemy_color = "b"
+    else: 
+        enemy_color = "w" 
+    
+    return is_square_attacked(board, king_location, enemy_color)
+
+
 def is_valid_pawn_move(board,start,end):
     start_row, start_column = start 
     end_row, end_column = end
@@ -158,3 +176,31 @@ def is_valid_pawn_move(board,start,end):
         return True
    
     return False
+
+def is_square_attacked(board, square, attacker_color):
+    for row in range(8):
+        for column in range(8):
+            piece = board[row][column]
+            if piece[0] == attacker_color:
+                if piece[1] == "P" and is_valid_pawn_move(board, (row, column), square):
+                    return True
+                if piece[1] == "R" and is_valid_rook_move(board, (row, column), square):
+                    return True
+                if piece[1] == "N" and is_valid_knight_move(board, (row, column), square):
+                    return True
+                if piece[1] == "B" and is_valid_bishop_move(board, (row, column), square):
+                    return True
+                if piece[1] == "Q" and is_valid_queen_move(board, (row, column), square):
+                    return True
+                if piece[1] == "K" and is_valid_king_move(board, (row,column), square): 
+                    return True 
+                
+    return False
+
+
+board = create_board()
+print("white in check (start):", is_in_check(board, "w"))
+board[6][4] = "--"
+board[4][4] = "bR"
+print("white in check (rook on e4):", is_in_check(board, "w"))
+print("black in check:", is_in_check(board, "b"))
