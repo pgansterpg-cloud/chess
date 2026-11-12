@@ -74,7 +74,13 @@ while True:
     if piece[1] == "P" and not is_valid_pawn_move(board,start,end):
         print("Not a valid move") 
         continue
-    
+
+    test_board = [row[:] for row in board] 
+    move_piece(test_board, start, end)
+    if is_in_check(test_board, current_turn):
+        print("That move would leave you in check") 
+        continue
+
     move_piece(board, start, end) 
     print_board(board)
 
@@ -83,3 +89,6 @@ while True:
         current_turn = "b" 
     else: 
         current_turn = "w" 
+
+    if is_in_check(board, current_turn):
+        print("Check!") 
