@@ -196,3 +196,53 @@ def is_square_attacked(board, square, attacker_color):
                     return True 
                 
     return False
+
+def is_legal_move(board, start, end, color): 
+       if is_empty(board, start):
+           return False   
+                                
+       row, column = start                                              
+       piece = board[row][column]  
+
+       if piece[0] != color:                                     
+           return False
+                                                        
+       end_row,end_column = end                                         
+       target = board[end_row][end_column]  
+
+       if target[0] == color:                                    
+           return False           
+                                                 
+       #check if piece is a rook if it is run rook logic                
+       if piece[1] == "R" and not is_valid_rook_move(board,start,end ):
+           return False
+                                                        
+       #check if piece is a bishop if it is run bishop logic            
+       if piece[1] == "B" and not is_valid_bishop_move(board,start,end):
+           return False
+                                                            
+       #check if piece is a queen if it is run queen logic              
+       if piece[1] == "Q" and not is_valid_queen_move(board,start,end): 
+           return False
+                                                            
+       #check if piece is a knight if it is run knight logic            
+       if piece[1] == "N" and not is_valid_knight_move(board,start,end):
+           return False
+                                                            
+       #check if piece is a king if it is run king logic                
+       if piece[1] == "K" and not is_valid_king_move(board,start,end):  
+           return False
+                                                            
+       #check if piece is a pawn if it is run pawn logic                
+       if piece[1] == "P" and not is_valid_pawn_move(board,start,end):  
+           return False                                
+                                     
+       test_board = [row[:] for row in board]                           
+       move_piece(test_board, start, end) 
+
+       if is_in_check(test_board, color):                        
+           return False
+     
+
+       
+       return True

@@ -27,58 +27,8 @@ while True:
         print("That move is not on the board")
         continue
         
-    if is_empty(board, start):
-        print("There's no piece on that square.")
-        continue
-
-
-    row, column = start 
-    piece = board[row][column] 
-
-    if piece[0] != current_turn:
-        print("it is the other player's turn.")
-        continue
-
-    end_row,end_column = end
-    target = board[end_row][end_column] 
-    if target[0] == current_turn:
-        print("can't take your own piece") 
-        continue
-
-    #check if piece is a rook if it is run rook logic 
-    if piece[1] == "R" and not is_valid_rook_move(board,start,end ): 
-        print("Not a valid move")
-        continue
-
-    #check if piece is a bishop if it is run bishop logic
-    if piece[1] == "B" and not is_valid_bishop_move(board,start,end):
-        print("Not a valid move")
-        continue
-
-    #check if piece is a queen if it is run queen logic 
-    if piece[1] == "Q" and not is_valid_queen_move(board,start,end):
-        print("Not a valid move")
-        continue
-
-    #check if piece is a knight if it is run knight logic 
-    if piece[1] == "N" and not is_valid_knight_move(board,start,end):
-        print("Not a valid move") 
-        continue
-
-    #check if piece is a king if it is run king logic 
-    if piece[1] == "K" and not is_valid_king_move(board,start,end):
-        print("Not a valid move") 
-        continue
-
-    #check if piece is a pawn if it is run pawn logic
-    if piece[1] == "P" and not is_valid_pawn_move(board,start,end):
-        print("Not a valid move") 
-        continue
-
-    test_board = [row[:] for row in board] 
-    move_piece(test_board, start, end)
-    if is_in_check(test_board, current_turn):
-        print("That move would leave you in check") 
+    if not is_legal_move(board, start, end, current_turn):
+        print("That is not a legal move.") 
         continue
 
     move_piece(board, start, end) 
