@@ -242,7 +242,17 @@ def is_legal_move(board, start, end, color):
 
        if is_in_check(test_board, color):                        
            return False
-     
-
        
        return True
+
+def has_legal_move(board,color):
+
+    for start_row in range(8):
+        for start_column in range(8):
+            for end_row in range(8):
+                for end_column in range(8):
+                    start = (start_row, start_column) 
+                    end = (end_row, end_column) 
+                    if is_legal_move(board, start, end, color):
+                        return True 
+    return False

@@ -40,5 +40,16 @@ while True:
     else: 
         current_turn = "w" 
 
-    if is_in_check(board, current_turn):
+    if not has_legal_move(board, current_turn): 
+        if is_in_check(board, current_turn):
+            if current_turn == "w":
+                print("Black is the winner!") 
+                break 
+            else:
+                print("White is the winner!")
+                break 
+        else:
+            print("draw!")
+            break 
+    elif is_in_check(board, current_turn):
         print("Check!") 
